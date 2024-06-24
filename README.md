@@ -39,11 +39,14 @@ MoviesApp is a Ruby on Rails application for managing movies, directors, actors,
 2. Each movie has only one director, as assumed from the CSV file data.
 3. Given the small size of the current codebase, the logic is kept within the model and controller for simplicity. However, as the application grows, it might benefit from adopting design patterns such as repositories or query objects for database access and service objects for controller logic. These patterns can enhance maintainability and scalability, making them valuable as the application's complexity grows.
 
+## Cached Data
+### Average Rating Cache
+The application caches the average rating of each movie. This cached value is updated whenever a new review is created, an existing review is updated, or a review is deleted. By caching the average rating, the application avoids recalculating it from scratch for each request involving movie listings or searches. This ensures that sorting movies by average rating is efficient and responsive.
+
 ## Models
 ### Movie
 Represents a movie with attributes like title, description, year, etc.
 Has associations with Director, Actors, Locations, and Reviews.
-Includes **caching** of average ratings for performance.
 ### Director
 Represents a director with a name attribute.
 Associated with movies through the *belongs_to* association.
