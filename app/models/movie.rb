@@ -6,10 +6,6 @@ class Movie < ApplicationRecord
   has_many :locations, through: :movies_locations
   has_many :reviews
 
-  # Update average rating cache when a review is created, updated, or destroyed
-  after_save :update_average_rating_cache
-  after_destroy :update_average_rating_cache
-
   def self.search_by_actor(actor_name)
     joins(:actors).where('LOWER(actors.name) LIKE ?', "%#{actor_name.downcase}%")
   end
